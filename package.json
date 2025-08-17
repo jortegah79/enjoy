@@ -6,8 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "build-github": "ng build --configuration production --base-href 'https://jortegah79.github.io/enjoy/' && cp dist/enjoy/index.html dist/enjoy/404.html",
-    "deploy-github": "npx angular-cli-ghpages --dir=dist/enjoy",
+    "build-github": "ng build --configuration production --base-href '/enjoy/' && cp dist/enjoy/browser/index.html dist/enjoy/browser/404.html",
+    "deploy-github": "npx angular-cli-ghpages --dir=dist/enjoy/browser",
     "test": "ng test"
   },
   "private": true,
