@@ -1,0 +1,18 @@
+<p class="p-3 py-2 font-bold text-lg">{{title() | titlecase}}: {{data()!.length}}</p>
+<swiper-container breakpoints='{
+    "320":  { "slidesPerView": 3 },
+    "640":  { "slidesPerView": 4 }, 
+    "1280": { "slidesPerView": 6 },  
+    "1440": { "slidesPerView": 10 }
+  }' speed="750" autoplay="true" loop="true" space-between="12" class="px-1"
+   >
+    @for (item of data(); track item) {
+    <swiper-slide 
+    (click)="goToList(item)"
+    class="cursor-pointer bg-gradient-to-b from-teal-700  to-teal-400 border-3 border-teal-900 h-16 md:h-24  w-20  content-center text-center rounded-lg 
+      hover:from-stone-700 hover:to-teal-300 ">
+        <p class="text-teal-100 font-bold text-sm lg:text-xl">{{ item | titlecase | cleanCategoryText }}</p>
+
+    </swiper-slide>
+    }
+</swiper-container>

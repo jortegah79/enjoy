@@ -1,0 +1,9 @@
+<div  class="dock dock-xs lg:hidden bg-teal-800 text-white border-t-2 border-t-teal-300 h-[50px]">
+  @for (ruta of rutas; track ruta.path) {
+  <a routerLink="{{ ruta.path }}" [routerLinkActive]="ruta.color">
+    <div class="mt-1">
+      <i class="{{ruta.icon}}"> {{ ruta.title}}</i>
+    </div>
+  </a>
+  }
+</div>

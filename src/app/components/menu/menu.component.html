@@ -1,0 +1,14 @@
+<div class="hidden lg:block absolute left-5 top-5 border rounded-lg w-1/8 xl:w-1/10">
+  
+  <ul class="menu menu-vertical p-0 w-full">
+    <li class="bg-teal-700 text-white p-2 pt-3 text-xl font-bold">{{appName}}</li>
+    @for (ruta of rutas; track ruta.path) {
+    <li>
+      <a class="p-2 pt-3 text-md"[routerLink]="ruta.path" [routerLinkActive]="ruta.color">
+        <i class="{{ruta.icon}}"></i>
+        {{ruta.title}}
+      </a>
+    </li>
+    }
+  </ul>
+</div>

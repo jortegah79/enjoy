@@ -1,0 +1,87 @@
+<div class="h-min-full pb-16  w-full overflow-y-auto">
+    <section>
+        <div class="text-2xl   bg-teal-700 text-teal-50 flex justify-start">
+            <img class="w-15 relative bottom-1.5" [src]="urlImage()" />
+
+            <div class="pt-4">Próxims events</div>
+        </div>       
+        @if(!acultural.cargando()){
+            <swiper-inicio [eventosProximos]="acultural.eventosProximos()"></swiper-inicio>       
+        }
+        @else {
+            <enjoy-loader />
+
+        }
+    </section>
+    <section class="px-3 mb-2 ">
+        <swiper-text-elements title="Categorías" [data]="acultural.categorias()"></swiper-text-elements>
+    </section>
+    <section class="px-6 ">
+        <p class="font-bold text-lg">Busca els events:</p>
+        <form [formGroup]="filterForm" (ngSubmit)="submit()">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 p-2">
+                <div class="">
+                    <fieldset class="fieldset ">
+                        <legend class="fieldset-legend">Per categoria</legend>
+                        <select class=" select w-auto lg:w-96" formControlName="categoria" name="categoria">
+                            <option value="">Totes</option>
+                            @for (categoria of acultural.categorias(); track categoria) {
+                            <option [value]="categoria">{{ categoria | titlecase | cleanCategoryText }}</option>
+                            }
+                        </select>
+                    </fieldset>
+                    <fieldset class="fieldset flex ">
+                        <legend class="fieldset-legend">Selecció de zona</legend>
+                        <label class="text-lg"><input (change)="selector($event)" type="radio" name="selector"
+                                class="radio radio-neutral me-1 ms-3" value="provincia"
+                                checked="checked" />Provincia</label>
+                        <label class="text-lg"><input (change)="selector($event)" type="radio" name="selector"
+                                class="radio radio-neutral me-1 ms-3" value="comarca" />Comarca</label>
+                        <label class="text-lg"><input (change)="selector($event)" type="radio" name="selector"
+                                class="radio radio-neutral me-1 ms-3" value="municipi" />Municipi</label>
+                    </fieldset>
+                </div>
+                <div>
+                    @if (currentSelector() === "provincia") {
+                    <fieldset class="fieldset ">
+                        <legend class="fieldset-legend">Provincia</legend>
+                        <select class="select w-auto lg:w-96" formControlName="provincia" name="provincia">
+                            <option value="">Totes</option>
+                            @for (provincia of acultural.provincias(); track provincia) {
+                            <option [value]="provincia">{{ provincia | titlecase | cleanCategoryText }}</option>
+                            }
+                        </select>
+                    </fieldset>
+                    }
+                    @else if ( currentSelector() ==="comarca") {
+                    <fieldset class="fieldset  ">
+                        <legend class="fieldset-legend">Comarca</legend>
+                        <select class="select  w-auto lg:w-96" formControlName="comarca" name="comarca">
+                            <option value="">Totes</option>
+                            @for (comarca of acultural.comarcas(); track comarca) {
+                            <option [value]="comarca">{{ comarca | titlecase | cleanCategoryText }}</option>
+                            }
+                        </select>
+                    </fieldset>
+                    }
+                    @else if ( currentSelector() === "municipi") {
+                    <fieldset class="fieldset ">
+                        <legend class="fieldset-legend">Municipi</legend>
+                        <select class="select  w-auto lg:w-96" formControlName="municipio" name="municipio">
+                            <option value="">Totes</option>
+                            @for (municipio of acultural.municipis(); track municipio) {
+                            <option [value]="municipio">{{ municipio | titlecase | cleanCategoryText }}</option>
+                            }
+                        </select>
+                    </fieldset>
+                    }
+
+                    <div class="w-auto lg:w-96 mt-4">
+                        <button class="btn w-full bg-teal-700 hover:bg-emerald-600 text-teal-100 text-xl ">¡ Enjoy
+                            !</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+</div>

@@ -1,0 +1,24 @@
+<swiper-container class="mt-2  rounded-3xl  m-2 " breakpoints='{
+    "320":  { "slidesPerView": 1 },
+    "640":  { "slidesPerView": 2 }, 
+    "1280": { "slidesPerView": 3 },  
+    "1440": { "slidesPerView": 4 }
+  }' speed="750" loop="true" autoplay="true" space-between="20">
+
+    @for (event of eventosProximos(); track $index) {
+
+    <swiper-slide [routerLink]="['/init/event',event.codi]"
+        class="cursor-pointer border-b-4 border-e-4 border-dark rounded-3xl">
+        <div class="relative">
+            <div class="absolute bottom-0 left-0 right-0  bg-teal-700 py-1  rounded-b-3xl w-full ">
+                <div class=" text-white text-shadow-black mx-3 flex justify-between mt-0">
+                    <span>{{ event.denominaci | slice:0:19 }} {{ event.denominaci.length > 19?"...":""}}</span>
+                    <span>{{event.data_inici | date:'dd / MM / yyyy' }}</span>
+                </div>
+            </div>
+            <img class="aspect-square rounded-3xl border-3 border-teal-900 items-center w-full h-full"
+                srcset="{{ event.image | prepareImage }}" />
+        </div>
+    </swiper-slide>
+    }
+</swiper-container>

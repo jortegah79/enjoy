@@ -1,0 +1,15 @@
+<swiper-container class="my-3 rounded-3xl " breakpoints='{
+    "320":  { "slidesPerView": 1 },
+    "640":  { "slidesPerView": 2 }, 
+    "1280": { "slidesPerView": 3 },  
+    "1440": { "slidesPerView": 3 }
+  }' speed="750" loop="true" autoplay="true" space-between="20">
+
+  @for (image of images(); track $index) {
+  <swiper-slide>
+    <img     
+    class="h-[250px] lg:h-[350px] border-b-4 border-e-4 border-dark rounded-3xl  items-center w-full "
+      srcset="{{ image | prepareImage }}" />
+  </swiper-slide>
+  }
+</swiper-container>
