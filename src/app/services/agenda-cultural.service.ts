@@ -91,11 +91,19 @@ export class AgendaCulturalService {
     const comarcasSet = new Set<string>();
     const provinciaSet = new Set<string>();
     const municipiSet = new Set<string>();
-    const eventosSet=new Set<Event>();
-    const events = Array.from(Object.values(data)).filter((event: Event) => event.amagar_dates === "true")
-    events.forEach(e=>eventosSet.add(e));
-    
-    const eventsMap = Array.from(eventosSet).map((event: Event) => {
+    const eventosSet = new Set<number>();
+    const events = Array.from(data).filter((event: Event) => {
+      if (event.amagar_dates === "true") {
+        if (!eventosSet.has(+event.codi)) {
+          eventosSet.add(+event.codi);
+          return true;
+        }
+        return false;
+      }
+      return false;
+    })
+
+    const eventsMap = Array.from(events).map((event: Event) => {
       const categorias = event.tags_categor_es?.replaceAll("agenda:categories/", "") ?? ""
       const ambitos = event.tags_mbits?.replaceAll("agenda:ambits/", "") ?? ""
       const comarca = event.comarca?.replaceAll("agenda:ubicacions/", "") ?? ""
@@ -118,7 +126,7 @@ export class AgendaCulturalService {
         ['comarca_i_municipi']: comarca_i_municipi.replaceAll("agenda:ubicacions/", ""),
       }
     })
-    
+
     this.categorias.set(Array.from(categoriaSet))
     this.provincias.set(Array.from(provinciaSet))
     this.comarcas.set(Array.from(comarcasSet))
@@ -127,13 +135,20 @@ export class AgendaCulturalService {
 
   }
   getDataEventsTemporalesMappedToSignal(data: Event[]) {
-    
-    const eventosSet=new Set<Event>();
-    data.forEach((e:Event)=>eventosSet.add(e))
 
-    const events = Array.from(eventosSet).filter((event: Event) => {
-      return (!event.amagar_dates && event.data_inici && (new Date(event.data_inici) > new Date()))
+    const eventosSet = new Set<number>();
+
+    const events = Array.from(data).filter((event: Event) => {
+      if (!event.amagar_dates && event.data_inici && (new Date(event.data_inici) > new Date())) {
+        if (!eventosSet.has( +event.codi )) {
+          eventosSet.add( +event.codi );
+          return true;
+        }
+        return false;
+      }
+      return false;
     })
+
     const eventosOrdenados = events.sort((eventoa: Event, eventob: Event) => {
       return new Date(eventoa.data_inici!).getTime() - new Date(eventob.data_inici!).getTime();
     });
