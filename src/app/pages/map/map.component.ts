@@ -3,6 +3,7 @@ import L from 'leaflet';
 import { GeolocationService } from '../../services/geolocation.service';
 import { AgendaCulturalService } from '../../services/agenda-cultural.service';
 import { MapEvent } from '../../interfaces/eventMap.interface';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'map',
@@ -80,7 +81,7 @@ export default class MapComponent implements AfterViewInit {
     events.forEach((event: MapEvent) => {
 
       let marker = L.marker(new L.LatLng(+event.lat, +event.lon), this.getOptionsMarker()).addTo(map)
-      marker.bindPopup(`<h4>${event.denominaci}</h4><a href="/init/event/${event.codi}">Més info...</a>`);
+      marker.bindPopup(`<h4>${event.denominaci}</h4><a href="${environment.BASE_HREF}/init/event/${event.codi}">Més info...</a>`);
       marker.on("click", () => marker.openPopup());
       return marker;
     });

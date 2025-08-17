@@ -1,6 +1,7 @@
 export const environment = {
     production: true,
     APP_NAME: "¡ Enjoy !",
+    BASE_HREF:"./enjoy/",
     DOMINIO: "https://agenda.cultura.gencat.cat/",
     URL: "https://analisi.transparenciacatalunya.cat/resource/rhpv-yr4f.json",
     EVENTS_DATA:'cpp-mb4545-ev',
