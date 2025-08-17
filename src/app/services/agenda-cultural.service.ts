@@ -91,8 +91,11 @@ export class AgendaCulturalService {
     const comarcasSet = new Set<string>();
     const provinciaSet = new Set<string>();
     const municipiSet = new Set<string>();
+    const eventosSet=new Set<Event>();
     const events = Array.from(Object.values(data)).filter((event: Event) => event.amagar_dates === "true")
-    const eventsMap = events.map((event: Event) => {
+    events.forEach(e=>eventosSet.add(e));
+    
+    const eventsMap = Array.from(eventosSet).map((event: Event) => {
       const categorias = event.tags_categor_es?.replaceAll("agenda:categories/", "") ?? ""
       const ambitos = event.tags_mbits?.replaceAll("agenda:ambits/", "") ?? ""
       const comarca = event.comarca?.replaceAll("agenda:ubicacions/", "") ?? ""
@@ -115,6 +118,7 @@ export class AgendaCulturalService {
         ['comarca_i_municipi']: comarca_i_municipi.replaceAll("agenda:ubicacions/", ""),
       }
     })
+    
     this.categorias.set(Array.from(categoriaSet))
     this.provincias.set(Array.from(provinciaSet))
     this.comarcas.set(Array.from(comarcasSet))
@@ -123,7 +127,11 @@ export class AgendaCulturalService {
 
   }
   getDataEventsTemporalesMappedToSignal(data: Event[]) {
-    const events = Array.from(Object.values(data)).filter((event: Event) => {
+    
+    const eventosSet=new Set<Event>();
+    data.forEach((e:Event)=>eventosSet.add(e))
+
+    const events = Array.from(eventosSet).filter((event: Event) => {
       return (!event.amagar_dates && event.data_inici && (new Date(event.data_inici) > new Date()))
     })
     const eventosOrdenados = events.sort((eventoa: Event, eventob: Event) => {
