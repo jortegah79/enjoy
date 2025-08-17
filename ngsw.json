@@ -1,0 +1,127 @@
+{
+  "configVersion": 1,
+  "timestamp": 1755467915167,
+  "index": "/enjoy/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/enjoy/chunk-A6YGZHEC.js",
+        "/enjoy/chunk-APNVO534.js",
+        "/enjoy/chunk-CUBRF2EB.js",
+        "/enjoy/chunk-DZ52W2XL.js",
+        "/enjoy/chunk-FQ2FDOLS.js",
+        "/enjoy/chunk-JPSGOPSW.js",
+        "/enjoy/chunk-JYIPF76R.js",
+        "/enjoy/chunk-K42YFQAQ.js",
+        "/enjoy/chunk-KQY5F6GS.js",
+        "/enjoy/chunk-PADRR4YO.js",
+        "/enjoy/chunk-Q6A7VFQH.js",
+        "/enjoy/chunk-S7JSKYC7.js",
+        "/enjoy/chunk-XNBRXMRF.js",
+        "/enjoy/chunk-YF67MXBS.js",
+        "/enjoy/chunk-YGXRKEH6.js",
+        "/enjoy/chunk-ZQOTA76M.js",
+        "/enjoy/favicon.ico",
+        "/enjoy/index.html",
+        "/enjoy/main-TZQEPUFN.js",
+        "/enjoy/manifest.webmanifest",
+        "/enjoy/polyfills-B6TNHZQ6.js",
+        "/enjoy/styles-E44S5QOU.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/enjoy/enjoy.png",
+        "/enjoy/icons/icon-128x128.png",
+        "/enjoy/icons/icon-144x144.png",
+        "/enjoy/icons/icon-152x152.png",
+        "/enjoy/icons/icon-192x192.png",
+        "/enjoy/icons/icon-384x384.png",
+        "/enjoy/icons/icon-512x512.png",
+        "/enjoy/icons/icon-72x72.png",
+        "/enjoy/icons/icon-96x96.png",
+        "/enjoy/images/enjoy.png",
+        "/enjoy/images/no-foto.jpg",
+        "/enjoy/media/bootstrap-icons-CVBWLLHT.woff2",
+        "/enjoy/media/bootstrap-icons-VQNJTM6Q.woff",
+        "/enjoy/media/layers-2x-TBM42ERR.png",
+        "/enjoy/media/layers-55W3Q4RM.png",
+        "/enjoy/media/marker-icon-2V3QKKVC.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/enjoy/chunk-A6YGZHEC.js": "92c2b2e689f33bb77149f9f2b306d4e5242a2215",
+    "/enjoy/chunk-APNVO534.js": "d0fb9d46fa83294e9c28e9544229fdb195f19a69",
+    "/enjoy/chunk-CUBRF2EB.js": "e4f657c5d3c0867075f1e88ba17725ff2400b8b7",
+    "/enjoy/chunk-DZ52W2XL.js": "e4dff357b2e736fd0bf82cdbc60aae2dbb910df5",
+    "/enjoy/chunk-FQ2FDOLS.js": "89485cee8bde3808c4ca1d82ba670167022eeee1",
+    "/enjoy/chunk-JPSGOPSW.js": "4eafce68d43a8cbb7d4f8d7053de1f1314cccb31",
+    "/enjoy/chunk-JYIPF76R.js": "e70887a74a7d92c0b23835f6c5a25beed044c8f3",
+    "/enjoy/chunk-K42YFQAQ.js": "cd79af0b23a8d18efd34e03665b577df39fe990b",
+    "/enjoy/chunk-KQY5F6GS.js": "3e8861d234ceac046ca74d094dbdf2956d9dcba7",
+    "/enjoy/chunk-PADRR4YO.js": "81ce7d9748685ef1637a5f200ff45db4394522ad",
+    "/enjoy/chunk-Q6A7VFQH.js": "d1ab7dbb7e9673b359d9fe8e755cb3ead40e1864",
+    "/enjoy/chunk-S7JSKYC7.js": "5c2d42961e2eadb522bdd29e5670e88ca5c8c10f",
+    "/enjoy/chunk-XNBRXMRF.js": "c0a319e55231fd2c77a1e6a9ad969a07581f74df",
+    "/enjoy/chunk-YF67MXBS.js": "d8c5320f2c97d93c417b48a9f8266a1aa82fee75",
+    "/enjoy/chunk-YGXRKEH6.js": "9ffe3daf838e3f8ed3ab6372159ec733b0eb8341",
+    "/enjoy/chunk-ZQOTA76M.js": "7d817644de735c8e6d7a8348d184b04d3841f3a9",
+    "/enjoy/enjoy.png": "4d814f66bad072a921a05b42c227f31aa9504bb2",
+    "/enjoy/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
+    "/enjoy/icons/icon-128x128.png": "f912963bdc6d5a38d8f1dd0afbaab2ce8d657acb",
+    "/enjoy/icons/icon-144x144.png": "b155fd5f2fd5d2ea7760721063003c4cd95fd783",
+    "/enjoy/icons/icon-152x152.png": "eae6e0f0c8afb8aaae339e2a569b43e9238e5e6c",
+    "/enjoy/icons/icon-192x192.png": "15c4180454633880d98674aa7394656196c91584",
+    "/enjoy/icons/icon-384x384.png": "94a915751ef6c9282df9aea405ad679230631814",
+    "/enjoy/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
+    "/enjoy/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
+    "/enjoy/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
+    "/enjoy/images/enjoy.png": "4d814f66bad072a921a05b42c227f31aa9504bb2",
+    "/enjoy/images/no-foto.jpg": "3b29d262ae6f6648c2ad4e1fa0eb83a43516facf",
+    "/enjoy/index.html": "24f9020cf0b407476ff7461b12eab14fd1bdbc1c",
+    "/enjoy/main-TZQEPUFN.js": "6a98d2f06353be4e2f416de629e0cd964015be67",
+    "/enjoy/manifest.webmanifest": "2d5fe8d293dcc4de35f71358b587a1a242ff7514",
+    "/enjoy/media/bootstrap-icons-CVBWLLHT.woff2": "b441fcff939e24fa0906a37b7788788b9fddbb68",
+    "/enjoy/media/bootstrap-icons-VQNJTM6Q.woff": "762010c79b4a05e1131fc8fb3b1aeff324d8033f",
+    "/enjoy/media/layers-2x-TBM42ERR.png": "152a162333e46d24f9d89f566312fc0c64011dee",
+    "/enjoy/media/layers-55W3Q4RM.png": "c9e7528e491a39232ba24a2706c6c739d6fb0f06",
+    "/enjoy/media/marker-icon-2V3QKKVC.png": "60a90bcbb2b42b7ddb4556db94eb7c1084b0e5da",
+    "/enjoy/polyfills-B6TNHZQ6.js": "bf76ac291d7f51c1139b7edcf86b359a30c08c64",
+    "/enjoy/styles-E44S5QOU.css": "5dc0d73d827fe370af7febcf9a00b68654b085d3"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
