@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1755530670440,
+  "timestamp": 1755530944775,
   "index": "/enjoy/index.html",
   "assetGroups": [
     {
@@ -88,7 +88,7 @@
     "/enjoy/images/no-foto.jpg": "3b29d262ae6f6648c2ad4e1fa0eb83a43516facf",
     "/enjoy/index.html": "b7095f22278b1dbf38108e042f99361113186bd1",
     "/enjoy/main-TZQEPUFN.js": "6a98d2f06353be4e2f416de629e0cd964015be67",
-    "/enjoy/manifest.webmanifest": "3f8bdb9e781cf89de62185b4f3097d8165e32a8c",
+    "/enjoy/manifest.webmanifest": "ccacf346e8e2287fc416eaa74396fcfa7be987ff",
     "/enjoy/media/bootstrap-icons-CVBWLLHT.woff2": "b441fcff939e24fa0906a37b7788788b9fddbb68",
     "/enjoy/media/bootstrap-icons-VQNJTM6Q.woff": "762010c79b4a05e1131fc8fb3b1aeff324d8033f",
     "/enjoy/media/layers-2x-TBM42ERR.png": "152a162333e46d24f9d89f566312fc0c64011dee",
