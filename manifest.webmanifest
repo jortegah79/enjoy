@@ -7,7 +7,7 @@
   "start_url": "/enjoy/",
   "background_color": "#ffffff",
   "orientation":"portrait",
-  "theme_color": "#ffffff",
+  "theme_color": "#6ea9a8",
   "icons": [
     {
       "src": "icons/icon-192x192.png",
