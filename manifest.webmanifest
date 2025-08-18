@@ -1,19 +1,21 @@
 {
-  "name": "enjoy",
+  "id": "/enjoy/",
+  "name": "Enjoy",
   "short_name": "Enjoy",
   "display": "standalone",
-  "scope": "./",
-  "start_url": "./",
-  "background_color":"#00796B",
+  "scope": "/enjoy/",
+  "start_url": "/enjoy/",
+  "background_color": "#00796B",
+  "theme_color": "#00796B",
   "icons": [
     {
-      "src": "assets/icons/icon-192x192.png",
+      "src": "icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "assets/icons/icon-512x512.png",
+      "src": "icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
