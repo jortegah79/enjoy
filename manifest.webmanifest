@@ -6,7 +6,8 @@
   "scope": "/enjoy/",
   "start_url": "/enjoy/",
   "background_color": "#ffffff",
-  "theme_color": "#00796B",
+  "orientation":"portrait",
+  "theme_color": "#ffffff",
   "icons": [
     {
       "src": "icons/icon-192x192.png",
