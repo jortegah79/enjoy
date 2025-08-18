@@ -2,7 +2,7 @@
   "id": "/enjoy/",
   "name": "Enjoy",
   "short_name": "Enjoy",
-  "display": "fullscreen",
+  "display": "standalone",
   "scope": "/enjoy/",
  "background_color": "#008080",
   "orientation":"portrait",
