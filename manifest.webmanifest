@@ -2,10 +2,9 @@
   "id": "/enjoy/",
   "name": "Enjoy",
   "short_name": "Enjoy",
-  "display": "standalone",
+  "display": "fullscreen",
   "scope": "/enjoy/",
-  "start_url": "/enjoy/",
-  "background_color": "#008080",
+ "background_color": "#008080",
   "orientation":"portrait",
   "theme_color": "#6ea9a8",
   "icons": [
