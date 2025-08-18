@@ -5,7 +5,7 @@
   "display": "standalone",
   "scope": "/enjoy/",
   "start_url": "/enjoy/",
-  "background_color": "#00796B",
+  "background_color": "#ffffff",
   "theme_color": "#00796B",
   "icons": [
     {
