@@ -4,9 +4,9 @@
   "short_name": "Enjoy",
   "display": "fullscreen",
   "scope": "/enjoy/",
- "background_color": "#008080",
+ "background_color": "#6ea9a8",
   "orientation":"portrait",
-  "theme_color": "#6ea9a8",
+  "theme_color": "#008080",
   "icons": [
     {
       "src": "icons/icon-192x192.png",
