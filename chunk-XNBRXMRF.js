@@ -1,1 +1,0 @@
-import{Fa as a}from"./chunk-JYIPF76R.js";var t=class e{transform(r){return r.replaceAll("-"," ").replaceAll("agenda:ambits/","").replaceAll("agenda:altres categories/","")}static \u0275fac=function(i){return new(i||e)};static \u0275pipe=a({name:"cleanCategoryText",type:e,pure:!0})};export{t as a};

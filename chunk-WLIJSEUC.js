@@ -1,0 +1,1 @@
+import{Fa as i,Tb as n}from"./chunk-YJAG7FBE.js";var o=class t{transform(r){if(!r)return"images/no-foto.jpg";let e=r.replaceAll(" ","%20");return`${n.DOMINIO}${e}`}static \u0275fac=function(e){return new(e||t)};static \u0275pipe=i({name:"prepareImage",type:t,pure:!0})};export{o as a};
