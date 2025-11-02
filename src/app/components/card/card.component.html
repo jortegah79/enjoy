@@ -3,7 +3,7 @@
         <img class="aspect-square rounded-s-3xl border-e-4 border-dark" src="{{event().image | prepareImage}}" alt="">
     </div>
     <div class="w-3/6 border-e-3xl p-2 text-center text-md lg:text-lg relative">
-        <p>{{ event().denominaci }}</p>    
+        <p class="text-gray-900 dark:text-gray-100">{{ event().denominaci }}</p>    
 
         <a class="btn p-4 bottom-1 right-1  bg-teal-700 hover:bg-teal-600 text-teal-50  rounded-full absolute" [routerLink]="['/init/event',event().codi]">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telegram mb-1"

@@ -5,3 +5,29 @@
 .container-app {
   @apply w-full lg:w-8/12 xl:w-9/12 m-auto;
 }
+
+/* Asegurar contraste en modo oscuro */
+html {
+  @apply dark:bg-gray-900;
+}
+
+/* Estilos para radiobuttons visibles con borde verde */
+.radio-label-teal input[type="radio"] {
+  border: 2px solid rgb(20 184 166); /* teal-500 */
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.dark .radio-label-teal input[type="radio"] {
+  border-color: rgb(94 234 212); /* teal-300 */
+}
+
+.radio-label-teal input[type="radio"]:checked {
+  border-color: rgb(15 118 110); /* teal-700 */
+  background-color: rgb(15 118 110);
+}
+
+.dark .radio-label-teal input[type="radio"]:checked {
+  border-color: rgb(13 148 136); /* teal-600 */
+  background-color: rgb(13 148 136);
+}

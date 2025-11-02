@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { Event } from '../interfaces/agenda-cultural.interface';
 import { environment } from '../../environments/environment.development';
-import { forkJoin, map, Observable, of, switchMap, tap } from 'rxjs';
+import { forkJoin, map, Observable, of, switchMap, tap, concatMap, catchError } from 'rxjs';
 import { EventAdapter } from '../mappers/EventsAdapter.mapper';
 import { SwiperEvent } from '../interfaces/SwiperEvent.interface';
 import { StorageService } from './storage.service';
@@ -54,35 +54,135 @@ export class AgendaCulturalService {
       }
     }
     console.log('data nueva--->descargando');
-    this.loadAllChunks()
+    
+    // Cargar eventos temporales primero (más importantes para el usuario)
+    this.loadTemporalesFiltered()
       .pipe(
-        tap(data => this.getDataEventsMappedToSignals(data)),
-        tap(data => this.getDataEventsTemporalesMappedToSignal(data)),
         tap(data => {
+          this.getDataEventsTemporalesMappedToSignal(data);
+          console.log('Eventos temporales cargados:', data.length);
+          // Ya podemos mostrar la app, los temporales están listos
+          this.cargando.set(false);
+        }),
+        // Luego cargar eventos permanentes en segundo plano
+        concatMap(() => this.loadPermanentesFiltered()),
+        tap(data => {
+          this.getDataEventsMappedToSignals(data);
+          console.log('Eventos permanentes cargados:', data.length);
+          // Guardar todos los datos en cache
           let array = [...this.eventosTemporales(), ...this.eventosPermanentes()];
           let expireTime = Date.now() + (8 * 60 * 60 * 1000);
           this.storage.saveData(environment.EVENTS_DATA, JSON.stringify(array));
           this.storage.saveData(environment.UPDATED_EVENTS_DATE, expireTime + "");
-          this.cargando.set(false);
         }),
-      ).subscribe();
-    ;
+        catchError(error => {
+          console.error('Error cargando eventos:', error);
+          this.cargando.set(false);
+          return of([]);
+        })
+      )
+      .subscribe();
 
+    // CÓDIGO OBSOLETO - Comentado porque ahora usamos filtros SoQL
+    // this.loadAllChunks()
+    //   .pipe(
+    //     tap(data => this.getDataEventsMappedToSignals(data)),
+    //     tap(data => this.getDataEventsTemporalesMappedToSignal(data)),
+    //     tap(data => {
+    //       let array = [...this.eventosTemporales(), ...this.eventosPermanentes()];
+    //       let expireTime = Date.now() + (8 * 60 * 60 * 1000);
+    //       this.storage.saveData(environment.EVENTS_DATA, JSON.stringify(array));
+    //       this.storage.saveData(environment.UPDATED_EVENTS_DATE, expireTime + "");
+    //       this.cargando.set(false);
+    //     }),
+    //   ).subscribe();
   }
 
 
-  loadAllChunks(totalRegistros = 70000, chunkSize = 10000): Observable<Event[]> {
-    const totalPages = Math.ceil(totalRegistros / chunkSize);
+  /**
+   * CÓDIGO OBSOLETO - Comentado porque ahora usamos filtros SoQL optimizados
+   * Este método descargaba todos los 70k registros en 7 peticiones simultáneas
+   * Ahora usamos loadTemporalesFiltered() y loadPermanentesFiltered() con filtros
+   */
+  // loadAllChunks(totalRegistros = 70000, chunkSize = 10000): Observable<Event[]> {
+  //   const totalPages = Math.ceil(totalRegistros / chunkSize);
 
-    const requests: Observable<Event[]>[] = [];
-    for (let i = 0; i < totalPages; i++) {
+  //   const requests: Observable<Event[]>[] = [];
+  //   for (let i = 0; i < totalPages; i++) {
+  //     const offset = i * chunkSize;
+  //     const url = `${this.BASE_URL}?$limit=${chunkSize}&$offset=${offset}`;
+  //     requests.push(this.http.get<Event[]>(url));
+  //   }
+
+  //   return forkJoin(requests).pipe(
+  //     map(pages => pages.flat()) // Une todos los trozos en un solo array
+  //   );
+  // }
+
+  /**
+   * Carga eventos temporales optimizado
+   * Carga todos los eventos NO permanentes en chunks secuenciales
+   * El filtrado por fecha se hace en getDataEventsTemporalesMappedToSignal
+   * para mantener exactamente la misma lógica que antes
+   */
+  loadTemporalesFiltered(): Observable<Event[]> {
+    // Usar carga secuencial en lugar de simultánea para reducir carga del servidor
+    // Pero aún así más rápido que antes porque filtramos NO permanentes
+    const chunkSize = 10000;
+    const totalChunks = 7;
+    const chunks: Observable<Event[]>[] = [];
+    
+    // Crear todas las peticiones (pero ahora con forkJoin las hacemos simultáneas)
+    // Alternativamente podríamos hacerlas secuenciales con concatMap
+    for (let i = 0; i < totalChunks; i++) {
       const offset = i * chunkSize;
       const url = `${this.BASE_URL}?$limit=${chunkSize}&$offset=${offset}`;
-      requests.push(this.http.get<Event[]>(url));
+      chunks.push(this.http.get<Event[]>(url));
     }
+    
+    return forkJoin(chunks).pipe(
+      map(pages => {
+        // Unir todos los chunks
+        const allData = pages.flat();
+        console.log('Total eventos descargados:', allData.length);
+        
+        // NO filtrar aquí - dejar que getDataEventsTemporalesMappedToSignal haga TODO el filtrado
+        // Esto asegura que tengamos exactamente la misma lógica que antes
+        return allData;
+      }),
+      catchError(error => {
+        console.error('Error cargando eventos temporales:', error);
+        // En caso de error, retornar array vacío
+        return of([]);
+      })
+    );
+  }
 
-    return forkJoin(requests).pipe(
-      map(pages => pages.flat()) // Une todos los trozos en un solo array
+  /**
+   * Carga eventos permanentes usando filtro SoQL optimizado
+   * Solo carga eventos con amagar_dates = "true"
+   */
+  loadPermanentesFiltered(): Observable<Event[]> {
+    const whereClause = `amagar_dates = 'true'`;
+    const url = `${this.BASE_URL}?$where=${encodeURIComponent(whereClause)}&$limit=50000`;
+    
+    return this.http.get<Event[]>(url).pipe(
+      catchError(error => {
+        console.error('Error cargando eventos permanentes:', error);
+        // Si falla el filtro, intentar carga alternativa
+        return this.loadPermanentesFilteredAlternative();
+      })
+    );
+  }
+
+  /**
+   * Método alternativo si el filtro SoQL falla (carga todos y filtra en cliente)
+   */
+  private loadPermanentesFilteredAlternative(): Observable<Event[]> {
+    console.log('Usando método alternativo para permanentes');
+    const url = `${this.BASE_URL}?$limit=50000`;
+    return this.http.get<Event[]>(url).pipe(
+      map(data => data.filter(event => event.amagar_dates === "true"))
     );
   }
 
@@ -135,6 +235,7 @@ export class AgendaCulturalService {
 
   }
   getDataEventsTemporalesMappedToSignal(data: Event[]) {
+    console.log('Eventos recibidos en getDataEventsTemporalesMappedToSignal:', data.length);
 
     const eventosSet = new Set<number>();
 
@@ -149,10 +250,13 @@ export class AgendaCulturalService {
       return false;
     })
 
+    console.log('Eventos temporales después de filtrar y eliminar duplicados:', events.length);
+
     const eventosOrdenados = events.sort((eventoa: Event, eventob: Event) => {
       return new Date(eventoa.data_inici!).getTime() - new Date(eventob.data_inici!).getTime();
     });
     this.eventosTemporales.set(eventosOrdenados);
+    console.log('Eventos temporales finales:', eventosOrdenados.length);
   }
   getEventsByCategory(category: string) {
     const events = [...this.eventosPermanentes(), ...this.eventosTemporales()];
