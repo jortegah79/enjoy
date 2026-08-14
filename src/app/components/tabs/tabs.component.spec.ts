@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideHttpClient } from '@angular/common/http';
 import { TabsComponent } from './tabs.component';
+import { provideRouter } from '@angular/router';
 
 describe('TabsComponent', () => {
   let component: TabsComponent;
@@ -8,7 +9,11 @@ describe('TabsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TabsComponent]
+      imports: [TabsComponent],
+      providers: [
+        provideRouter([]),
+        provideHttpClient()
+      ]
     })
     .compileComponents();
 
@@ -21,3 +26,4 @@ describe('TabsComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+  

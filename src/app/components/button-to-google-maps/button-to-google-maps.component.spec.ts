@@ -14,6 +14,9 @@ describe('ButtonToGoogleMapsComponent', () => {
 
     fixture = TestBed.createComponent(ButtonToGoogleMapsComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('lat', '41.3851');
+    fixture.componentRef.setInput('lon', '2.1734'); 
+    
     fixture.detectChanges();
   });
 

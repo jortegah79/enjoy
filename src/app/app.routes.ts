@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     {
-        path: "init",
+        path: "",
         loadComponent: () => import("./pages/selector/selector.component"),
         children: [
             {
@@ -33,6 +33,6 @@ export const routes: Routes = [
 
     },
     {
-        path: "**", redirectTo: "init", pathMatch: "full"
+        path: "**", redirectTo: "", pathMatch: "full"
     }
 ];

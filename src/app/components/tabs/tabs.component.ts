@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { menuRutaItem, rutaTabs } from '../../../assets/rutas';
 
@@ -7,7 +7,9 @@ import { menuRutaItem, rutaTabs } from '../../../assets/rutas';
   imports: [RouterLink,RouterLinkActive],
   templateUrl: './tabs.component.html',
   })
-export class TabsComponent {
+
+  @Injectable({ providedIn: 'root' })
+  export class TabsComponent {
 
   rutas:menuRutaItem[]=rutaTabs;
 

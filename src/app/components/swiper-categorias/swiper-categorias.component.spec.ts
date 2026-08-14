@@ -14,6 +14,8 @@ describe('SwiperCategoriasComponent', () => {
 
     fixture = TestBed.createComponent(SwiperCategoriasComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('data', ['item1', 'item2', 'item3']);
+    fixture.componentRef.setInput('title', 'Test Title');
     fixture.detectChanges();
   });
 

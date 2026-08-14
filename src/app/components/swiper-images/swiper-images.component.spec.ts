@@ -6,6 +6,7 @@ describe('SwiperImagesComponent', () => {
   let component: SwiperImagesComponent;
   let fixture: ComponentFixture<SwiperImagesComponent>;
 
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SwiperImagesComponent]
@@ -14,10 +15,13 @@ describe('SwiperImagesComponent', () => {
 
     fixture = TestBed.createComponent(SwiperImagesComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('images', ['https://picsum.photos/200/300', 'https://picsum.photos/200/300']);
+   
     fixture.detectChanges();
   });
 
   it('should create', () => {
+   
     expect(component).toBeTruthy();
   });
 });

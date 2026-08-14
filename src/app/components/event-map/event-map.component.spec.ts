@@ -14,6 +14,8 @@ describe('EventMapComponent', () => {
 
     fixture = TestBed.createComponent(EventMapComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('lat', '41.3851');
+    fixture.componentRef.setInput('lng', '2.1734');
     fixture.detectChanges();
   });
 

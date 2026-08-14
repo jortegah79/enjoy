@@ -40,7 +40,7 @@ export class AgendaCulturalService {
 
   getAllEvents() {
     this.cargando.set(true)
-    if (!this.storage.isOldData()) {
+  
       const data = this.storage.getData(environment.EVENTS_DATA);
       if (data) {
         const eventos: Event[] = JSON.parse(data);
@@ -48,11 +48,10 @@ export class AgendaCulturalService {
           this.getDataEventsMappedToSignals(eventos);
           this.getDataEventsTemporalesMappedToSignal(eventos);
           console.log("Recuperando data")
-          this.cargando.set(false);
-          return;
+          this.cargando.set(false);   
         }
       }
-    }
+      if (this.storage.isOldData()) {
     console.log('data nueva--->descargando');
     
     // Cargar eventos temporales primero (más importantes para el usuario)
@@ -74,6 +73,8 @@ export class AgendaCulturalService {
           let expireTime = Date.now() + (8 * 60 * 60 * 1000);
           this.storage.saveData(environment.EVENTS_DATA, JSON.stringify(array));
           this.storage.saveData(environment.UPDATED_EVENTS_DATE, expireTime + "");
+          console.log("Cambios en data");
+          
         }),
         catchError(error => {
           console.error('Error cargando eventos:', error);
@@ -82,6 +83,7 @@ export class AgendaCulturalService {
         })
       )
       .subscribe();
+    }
 
     // CÓDIGO OBSOLETO - Comentado porque ahora usamos filtros SoQL
     // this.loadAllChunks()
@@ -129,7 +131,7 @@ export class AgendaCulturalService {
     // Usar carga secuencial en lugar de simultánea para reducir carga del servidor
     // Pero aún así más rápido que antes porque filtramos NO permanentes
     const chunkSize = 10000;
-    const totalChunks = 7;
+    const totalChunks = 9;
     const chunks: Observable<Event[]>[] = [];
     
     // Crear todas las peticiones (pero ahora con forkJoin las hacemos simultáneas)
@@ -180,7 +182,7 @@ export class AgendaCulturalService {
    */
   private loadPermanentesFilteredAlternative(): Observable<Event[]> {
     console.log('Usando método alternativo para permanentes');
-    const url = `${this.BASE_URL}?$limit=50000`;
+    const url = `${this.BASE_URL}?$limit=60000`;
     return this.http.get<Event[]>(url).pipe(
       map(data => data.filter(event => event.amagar_dates === "true"))
     );
